@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/public/stylesheets/style.css" />
+    <title>Home Page</title>
+</head>
+
+<body>
+    <img src="/assets/logo.png"/>
+    <% if (user) { %>
+    <h1>Welcome to Little Artlings, <%= user.username %>!</h1>
+    <p>
+        <a href="/auth/sign-out">Sign out</a>
+    </p>
+    <% } else { %>
+    <h1>Little Artlings</h1>
+        <h2>Personal Digital Art Galleries, for kids!</h2>
+    <p>
+        <a href="/auth/sign-up">Sign up</a> or <a href="/auth/sign-in">sign in</a>.
+    </p>
+    <% } %>
+</body>
+<footer></footer>
+
+
+</html>
