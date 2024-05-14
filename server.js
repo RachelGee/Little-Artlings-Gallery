@@ -24,8 +24,12 @@ mongoose.connection.on('connected', () => {
     console.log(`Connected to MongoDB Atlas at ${mongoose.connection.name}'`);
 });
 
+//require in Middleware
+const isSignedIn = require('./middleware/is-signed-in.js');
+
 // import controllers
 const authController = require('./controllers/users.js')
+const artworksController = require('./controllers/artworks.js')
 
 
 
@@ -43,6 +47,10 @@ app.use(session({
     saveUninitialized: true,
 }))
 
+// Use the "users" controller for all routes begininng with "/auth"
+app.use('/auth', authController)
+app.use('/artworks', isSignedIn, artworksController);
+
 
 /* Routes
 -------------------------------------------------- */
@@ -52,19 +60,16 @@ app.get('/', function (req, res) {
     res.render('index', { user: req.session.user })
 })
 
-app.use('/auth', authController)
 
-// Protected route: Only accessible by authorized users
-app.get('/vip-lounge', (req, res) => {
-    if (req.session.user) {
-        res.send(`Welcome to the party ${req.session.user.username}.`);
-    } else {
-        res.send("Sorry, no guests allowed.");
-    }
-})
+// // Protected route: Only accessible by authorized users
+// app.get('/vip-lounge', (req, res) => {
+//     if (req.session.user) {
+//         res.send(`Welcome to the party ${req.session.user.username}.`);
+//     } else {
+//         res.send("Sorry, no guests allowed.");
+//     }
+// })
 
-// Use the "users" controller for all routes begininng with "/auth"
-app.use('/auth', authController)
 
 
 /* Run Express app on your computer on port 3000

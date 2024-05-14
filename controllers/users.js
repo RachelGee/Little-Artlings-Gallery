@@ -69,11 +69,12 @@ router.post('/sign-in', async (req, res) => {
     // Start a session with the found user. 
     // Save user info (except passwords) in the session.
     console.log(req.session)
+    //artworks schema owner
     req.session.user = { username: userInDatabase.username }
     console.log(req.session)
 
     // Redirect the user to the home page now that a session ha sbeen created
-    res.redirect('/');
+    res.redirect('/'); //gallery page
 })
 
 // Sign-out route
