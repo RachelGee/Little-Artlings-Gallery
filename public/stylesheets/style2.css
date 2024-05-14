@@ -1,5 +1,6 @@
 body {
-    background: #fff8ed;
+    background: url(../assets/background.png) no-repeat center center fixed;
+    background-size: cover;
     font-family: "DM Sans", sans-serif;
     display: flex;
     flex-direction: column;
@@ -9,8 +10,6 @@ body {
   }
   
   h1 {
-    color: #9526ea;
+    color: black;
     font-size: 3.6em;
   }
-  
-  

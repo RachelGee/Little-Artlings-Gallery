@@ -1,7 +1,5 @@
 /* 
------------------------------------------------------------------------------------
 NOTE: Remember that all routes in this file are prefixed with `localhost:3000/auth`
------------------------------------------------------------------------------------
 */
 
 
@@ -69,7 +67,8 @@ router.post('/sign-in', async (req, res) => {
     // Start a session with the found user. 
     // Save user info (except passwords) in the session.
     console.log(req.session)
-    //artworks schema owner
+
+    //artworks schema owner here?
     req.session.user = { username: userInDatabase.username }
     console.log(req.session)
 

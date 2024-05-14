@@ -2,8 +2,12 @@
 
 const mongoose = require("mongoose");
 
-const artworkSchema = new mongoose.Schema({
-    artworkTitle: {
+const artworkSchema = new mongoose.Schema({ 
+  artworkImage: {
+    type: Image,
+    required: true,
+  },
+  artworkTitle: {
       type: String,
       required: true,
     },

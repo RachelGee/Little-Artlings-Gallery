@@ -6,7 +6,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const morgan = require('morgan');
-const path = require("path");
+const path = require('path');
 
 
 /* Create and configure Express app
@@ -49,8 +49,10 @@ app.use(session({
 
 // Use the "users" controller for all routes begininng with "/auth"
 app.use('/auth', authController)
-app.use('/artworks', isSignedIn, artworksController);
+// app.use('/artworks', isSignedIn, artworksController);
 
+app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, "public")));
 
 /* Routes
 -------------------------------------------------- */
@@ -58,6 +60,26 @@ app.use('/artworks', isSignedIn, artworksController);
 app.get('/', function (req, res) {
     console.log(req.session)
     res.render('index', { user: req.session.user })
+})
+
+app.get('/artwork', function (req, res) {
+    console.log(req.session.user)
+    res.render('./artwork/index', { user: req.session.user })
+})
+
+app.get('/edit', function (req, res) {
+    console.log(req.session.user)
+    res.render('./artwork/edit', { user: req.session.user })
+})
+
+app.get('/community-gallery', function (req, res) {
+    console.log(req.session.user)
+    res.render('./comm-gallery/index.ejs', { user: req.session.user })
+})
+
+app.get('/artist-profile', function (req, res) {
+    console.log(req.session.user)
+    res.render('./artist/index.ejs', { user: req.session.user })
 })
 
 
