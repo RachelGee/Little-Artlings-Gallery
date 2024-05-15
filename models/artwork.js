@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 const artworkSchema = new mongoose.Schema({ 
   artworkImage: {
-    type: Image,
+    type: String,
     required: true,
   },
   artworkTitle: {
@@ -16,7 +16,7 @@ const artworkSchema = new mongoose.Schema({
       required: true,
     },
     medium: {
-      type: Number,
+      type: String,
       required: true,
     },
     owner: {
@@ -25,6 +25,6 @@ const artworkSchema = new mongoose.Schema({
       },
   });
 
-  const artwork = mongoose.model('artwork', artworkSchema);
+  const Artwork = mongoose.model('Artwork', artworkSchema);
 
-module.exports = artwork;
+module.exports = Artwork;

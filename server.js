@@ -24,8 +24,11 @@ mongoose.connection.on('connected', () => {
     console.log(`Connected to MongoDB Atlas at ${mongoose.connection.name}'`);
 });
 
+
 //require in Middleware
 const isSignedIn = require('./middleware/is-signed-in.js');
+const Artwork = require('./models/artwork.js');
+
 
 // import controllers
 const authController = require('./controllers/users.js')
@@ -49,7 +52,7 @@ app.use(session({
 
 // Use the "users" controller for all routes begininng with "/auth"
 app.use('/auth', authController)
-// app.use('/artworks', isSignedIn, artworksController);
+
 
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, "public")));
@@ -62,25 +65,31 @@ app.get('/', function (req, res) {
     res.render('index', { user: req.session.user })
 })
 
+app.use(isSignedIn);
+
+//Gallery
 app.get('/artwork', function (req, res) {
     console.log(req.session.user)
     res.render('./artwork/index', { user: req.session.user })
 })
 
+//Edit Gallery + Add
 app.get('/edit', function (req, res) {
     console.log(req.session.user)
     res.render('./artwork/edit', { user: req.session.user })
 })
+//Artist profile
+app.get('/artist-profile', function (req, res) {
+    console.log(req.session.user)
+    res.render('./artist/index.ejs', { user: req.session.user })
+})
 
+//Community Gallery
 app.get('/community-gallery', function (req, res) {
     console.log(req.session.user)
     res.render('./comm-gallery/index.ejs', { user: req.session.user })
 })
 
-app.get('/artist-profile', function (req, res) {
-    console.log(req.session.user)
-    res.render('./artist/index.ejs', { user: req.session.user })
-})
 
 
 // // Protected route: Only accessible by authorized users
