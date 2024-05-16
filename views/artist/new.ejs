@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <meta name="referrer" content="no-referrer"> <!-- this is placed here to override the 403 error with the imigur-->
+    <title>Add Artist Profile</title>
+</head>
+<body>
+    <img src="../assets/banner-logo.png"/>
+    <%- include('../partials/nav.ejs') %> 
+    <h1>Add a New Artist Profile</h1>
+
+    <form action="../artist/index" method = "POST">
+        <label for="artist-name"> Artist Name:</label>
+        <input type="text" name="artistName" id="artist-name" required/>
+        <br>
+        <label for="artist-age"> Age:</label>
+        <input type="number" name="artistAge" id="artist-age"/>
+        <br>
+        <label for="artist-bio"> Artist Bio:</label>
+        <input type="text" name="artistBio" id="artist-bio"/>
+        <br><br>
+        <button type="submit">Add to My Artist Profiles</button>
+        <br><br>
+        <button type="edit-artists">Edit My Profiles</button>
+    </form>
+    <p>
+        <a href="/auth/sign-out">Sign out</a>
+    </p>      
+</body>
+</html>
