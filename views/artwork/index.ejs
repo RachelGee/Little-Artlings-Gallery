@@ -11,7 +11,19 @@
   <body>
     <img src="../assets/banner-logo.png"/>
     <%- include('../partials/nav.ejs') %>
-    <h1>Artwork in Your Gallery, <%= user.username %> : </h1>
+    <h1>Artwork in Your Gallery:</h1>
+    <div>
+      <% if (User.userGallery.length > 0) {%>
+          <% User.userGallery.forEach((artwork) => { %>
+              <p>
+                <img src="<%= artwork.artworkImage %>"></img>  
+                <a href="/artwork/<%= artwork._id %>"><%= artwork.artworkTitle %></a>
+              </p>
+
+         <% }) %>
+         <p>No artwork found in your gallery</p>
+          <% } %>
+  </div>
     <p>
         <a href="/auth/sign-out">Sign out</a>
     </p>

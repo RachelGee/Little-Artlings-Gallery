@@ -19,10 +19,6 @@ const artworkSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    owner: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-      },
   });
 
   const Artwork = mongoose.model('Artwork', artworkSchema);

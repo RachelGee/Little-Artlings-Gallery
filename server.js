@@ -34,7 +34,7 @@ const Artwork = require('./models/artwork.js');
 // import controllers
 const authController = require('./controllers/users.js')
 const artworksController = require('./controllers/artworks.js')
-
+const artistsController = require('./controllers/artists.js')
 
 
 /* Middleware
@@ -51,10 +51,14 @@ app.use(session({
     saveUninitialized: true,
 }))
 
-// Use the "users" controller for all routes begininng with "/auth"
-app.use('/auth', authController)
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, "public")));
+
+
+app.use('/auth', authController);
+app.use('/artist', artistsController);
+app.use('/artwork', artworksController);
+
 
 /* Routes
 -------------------------------------------------- */
@@ -72,33 +76,18 @@ app.get('/artwork', function (req, res) {
     res.render('./artwork/index', { user: req.session.user })
 })
 
-//Edit Gallery + Add
-app.get('/edit', function (req, res) {
-    console.log(req.session.user)
-    res.render('./artwork/edit', { user: req.session.user })
-})
-//Artist profile
-app.get('/artist-profile', function (req, res) {
-    console.log(req.session.user)
-    res.render('./artist/index.ejs', { user: req.session.user })
-})
+// //Edit Gallery + Add
+// app.get('/edit', function (req, res) {
+//     console.log(req.session.user)
+//     res.render('./artwork/edit', { user: req.session.user })
+// })
+
 
 //Community Gallery
 app.get('/community-gallery', function (req, res) {
     console.log(req.session.user)
     res.render('./comm-gallery/index.ejs', { user: req.session.user })
 })
-
-
-
-// // Protected route: Only accessible by authorized users
-// app.get('/vip-lounge', (req, res) => {
-//     if (req.session.user) {
-//         res.send(`Welcome to the party ${req.session.user.username}.`);
-//     } else {
-//         res.send("Sorry, no guests allowed.");
-//     }
-// })
 
 
 

@@ -15,6 +15,18 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    userArtists: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Artist'
+        }
+    ],
+    userGallery: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Artwork'
+        }
+    ]
 });
 
 

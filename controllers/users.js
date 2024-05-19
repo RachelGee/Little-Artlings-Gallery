@@ -68,8 +68,7 @@ router.post('/sign-in', async (req, res) => {
     // Save user info (except passwords) in the session.
     console.log(req.session)
 
-    //artworks schema owner here?
-    req.session.user = { username: userInDatabase.username }
+    req.session.user = { username: userInDatabase.username, userId:userInDatabase._id }
     console.log(req.session)
 
     // Redirect the user to the home page now that a session ha sbeen created
