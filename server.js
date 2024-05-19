@@ -28,7 +28,7 @@ mongoose.connection.on('connected', () => {
 
 //require in Middleware
 const isSignedIn = require('./middleware/is-signed-in.js');
-const artwork = require('./models/artwork.js');
+const Artwork = require('./models/artwork.js');
 
 
 // import controllers
@@ -67,22 +67,16 @@ app.get('/', function (req, res) {
 app.use(isSignedIn);
 
 //Gallery
-app.get('/gallery', function (req, res) {
+app.get('/artwork', function (req, res) {
     console.log(req.session.user)
     res.render('./artwork/index', { user: req.session.user })
 })
 
-//Edit Gallery 
+//Edit Gallery + Add
 app.get('/edit', function (req, res) {
     console.log(req.session.user)
     res.render('./artwork/edit', { user: req.session.user })
 })
-//Add to  Gallery 
-app.get('/add-to-gallery', function (req, res) {
-    console.log(req.session.user)
-    res.render('./artwork/new', { user: req.session.user })
-})
-
 //Artist profile
 app.get('/artist-profile', function (req, res) {
     console.log(req.session.user)

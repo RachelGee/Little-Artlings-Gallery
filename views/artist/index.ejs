@@ -11,12 +11,21 @@
 <body>
     <img src="../assets/banner-logo.png"/>
     <%- include('../partials/nav.ejs') %> 
-    <h1>View <%= user.username %> 's Artist Profiles</h1>
+    <h1> <%= user.username %> 's Artist Profiles</h1>
 
+    <form action="../artist/index" method = "POST">
+        <label for="artist-name"> Artist Name:</label>
+        <input type="text" name="artistName" id="artist-name" required/>
+        <br>
+        <label for="artist-age"> Age:</label>
+        <input type="number" name="artistAge" id="artist-age"/>
+        <br>
+        <label for="artist-bio"> Artist Bio:</label>
+        <input type="text" name="artistBio" id="artist-bio"/>
         <br><br>
-        <button type="submit">Add a New Artist Profile</button>
+        <button type="submit">Add to My Artist Profiles</button>
         <br><br>
-        <button type="edit-profiles">Edit My Profiles</button>
+        <button type="./edit">Edit My Profiles</button>
     </form>
     <p>
         <a href="/auth/sign-out">Sign out</a>

@@ -6,29 +6,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/stylesheets/style.css" />
         <meta name="referrer" content="no-referrer"> <!-- this is placed here to override the 403 error with the imigur-->
-    <title>Gallery</title>
+    <title>Your Artwork</title>
   </head>
   <body>
-      <img src="../assets/banner-logo.png"/>
+    <img src="../assets/banner-logo.png"/>
     <%- include('../partials/nav.ejs') %>
-    <h1>View Artwork in Your Gallery, <%= user.username %> : </h1>
-    <br><br>
-    <button onclick="redirectToOtherPage()">Edit Your Gallery</button>
-    <script>
-        function redirectToOtherPage() {
-        window.location.href = "/artwork/edit";
-         }
-    </script>        
-        <br><br>
-
-        <button onclick="redirectToOtherPage()">Add New Art to Your Gallery</button>
-        <script>
-            function redirectToOtherPage() {
-            window.location.href = "/add-to-gallery";
-             }
-        </script>
-
-
+    <h1>Artwork in Your Gallery, <%= user.username %> : </h1>
     <p>
         <a href="/auth/sign-out">Sign out</a>
     </p>
