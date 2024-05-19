@@ -1,6 +1,7 @@
 /* Import packages
 -------------------------------------------------- */
-const dotenv = require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config();
 const session = require('express-session');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -52,8 +53,6 @@ app.use(session({
 
 // Use the "users" controller for all routes begininng with "/auth"
 app.use('/auth', authController)
-
-
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, "public")));
 
