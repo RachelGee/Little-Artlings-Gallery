@@ -16,7 +16,7 @@ router.get('/', async function (req, res) {
         console.log(error);
         res.render('./artwork/index.ejs');
     }
-})
+});
 
 // // New artwork
 // router.get('/new', (req, res) => {

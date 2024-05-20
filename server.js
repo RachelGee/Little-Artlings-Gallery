@@ -9,7 +9,7 @@ const methodOverride = require('method-override');
 const morgan = require('morgan');
 const path = require('path');
 const passUserToView = require('./middleware/pass-user-to-view.js');
-
+const User = require('./models/user.js');
 
 /* Create and configure Express app
 -------------------------------------------------- */
@@ -54,7 +54,6 @@ app.use(session({
 
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, "public")));
-
 app.use(passUserToView);
 app.use('/auth', authController);
 app.use(isSignedIn);
@@ -71,24 +70,13 @@ app.get('/', function (req, res) {
 })
 
 
-//Gallery
-// app.get('/artwork', function (req, res) {
-//     console.log(req.session.user)
-//     res.render('./artwork/index', { user: req.session.user })
-// })
-
-// //Edit Gallery + Add
-// app.get('/edit', function (req, res) {
-//     console.log(req.session.user)
-//     res.render('./artwork/edit', { user: req.session.user })
-// })
-
-
 //Community Gallery
-app.get('/community-gallery', function (req, res) {
+app.get('/community-gallery', async function (req, res) {
+    const allUsers = await User.find().populate('userGallery');
     console.log(req.session.user)
-    res.render('./comm-gallery/index.ejs', { user: req.session.user })
+    res.render('./comm-gallery/show.ejs', { users: allUsers })
 })
+
 
 
 

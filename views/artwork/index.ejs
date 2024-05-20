@@ -15,8 +15,10 @@
     <div>
       <% if (user.userGallery.length > 0) {%>
           <% user.userGallery.forEach((artwork) => { %>
+            <div class="image-container">
+            <img src="<%= artwork.artworkImage %>"></img>  
+            </div>
               <p>
-                <img src="<%= artwork.artworkImage %>"></img>  
                 <a href="/artwork/<%= artwork._id %>"><%= artwork.artworkTitle %></a>
               </p>
               <% }) %>
