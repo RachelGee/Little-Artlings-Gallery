@@ -13,16 +13,16 @@
     <%- include('../partials/nav.ejs') %>
     <h1>Artwork in Your Gallery:</h1>
     <div>
-      <% if (User.userGallery.length > 0) {%>
-          <% User.userGallery.forEach((artwork) => { %>
+      <% if (user.userGallery.length > 0) {%>
+          <% user.userGallery.forEach((artwork) => { %>
               <p>
                 <img src="<%= artwork.artworkImage %>"></img>  
                 <a href="/artwork/<%= artwork._id %>"><%= artwork.artworkTitle %></a>
               </p>
-
-         <% }) %>
-         <p>No artwork found in your gallery</p>
-          <% } %>
+              <% }) %>
+          <% } else { %>
+            <p>No artwork found in your gallery</p>
+          <% }%>
   </div>
     <p>
         <a href="/auth/sign-out">Sign out</a>

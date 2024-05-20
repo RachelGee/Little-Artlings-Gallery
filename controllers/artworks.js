@@ -7,9 +7,10 @@ const Artwork = require('../models/artwork.js');
 
 
 //INDEX of artwork aka Gallery
-router.get('/artwork', async function (req, res) {
+router.get('/', async function (req, res) {
     try {
         const currentUser = await User.findById(req.session.user.userId).populate('userGallery');
+        console.log(currentUser);
         res.render('./artwork/index.ejs', {user: currentUser});
     } catch (error) {
         console.log(error);

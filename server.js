@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const morgan = require('morgan');
 const path = require('path');
+const passUserToView = require('./middleware/pass-user-to-view.js');
 
 
 /* Create and configure Express app
@@ -54,8 +55,9 @@ app.use(session({
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, "public")));
 
-
+app.use(passUserToView);
 app.use('/auth', authController);
+app.use(isSignedIn);
 app.use('/artist', artistsController);
 app.use('/artwork', artworksController);
 
@@ -68,13 +70,12 @@ app.get('/', function (req, res) {
     res.render('index', { user: req.session.user })
 })
 
-app.use(isSignedIn);
 
 //Gallery
-app.get('/artwork', function (req, res) {
-    console.log(req.session.user)
-    res.render('./artwork/index', { user: req.session.user })
-})
+// app.get('/artwork', function (req, res) {
+//     console.log(req.session.user)
+//     res.render('./artwork/index', { user: req.session.user })
+// })
 
 // //Edit Gallery + Add
 // app.get('/edit', function (req, res) {

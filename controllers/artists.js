@@ -10,17 +10,27 @@ router.get('/artist-profile', async function (req, res) {
     const currentUser = await User.findById(req.session.user.userId).populate('userArtists');
     res.render('./artist/index.ejs', { foundUser: currentUser });
 })
+
+//**Artist new
+router.get('/artist-new', async function (req, res) {
+    try {
+    const currentUser = await User.findById(req.session.user.userId).populate('userArtists');
+    console.log('current User', currentUser)
+    res.render('./artist/new.ejs', { foundUser: currentUser })
+    } catch (error) {
+        console.log(error);
+        res.redirect('/');
+    }
+})
+
 //individual Artist show
 router.get('/:artistId', async function (req, res) {
     const artist = await Artist.findById(req.params.artistId)
     res.render('./artist/show.ejs', {artist})
 })
-//Artist new
-router.get('/artist-new', async function (req, res) {
-    const currentUser = await User.findById(req.session.user.userId).populate('userArtists');
-    console.log('current User', currentUser)
-    res.render('./artist/new.ejs', { foundUser: currentUser })
-})
+
+
+
 
 // Create
 router.post('/', async (req, res) => {
