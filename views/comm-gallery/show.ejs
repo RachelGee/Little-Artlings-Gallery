@@ -9,23 +9,20 @@
     <title>Community Gallery</title>
 </head>
 <body>
-    <img src="../assets/banner-logo.png"/>
+    <img src="/assets/banner-logo.png"/>
     <%- include('../partials/nav.ejs') %> 
     <h1> Community Art Gallery</h1>   
-    </div>  
+    <div class="gallery-container">
         <% users.forEach((user) => { %>
             <% user.userGallery.forEach((artwork) => {%>
-          <div class="gallery-container">
+            <div>  
           <img src="<%= artwork.artworkImage %>"></img>  
+          <p>
+            <a href="/artwork/<%= artwork._id %>"><%= artwork.artworkTitle %></a>
+          </p>
           </div>
-            <p>
-              <a href="/artwork/<%= artwork._id %>"><%= artwork.artworkTitle %></a>
-            </p>
             <% }) %>
             <%}) %>
     </div>
-    <div></div>
-    <div></div>
-    <div></div>
 </body>
 </html>

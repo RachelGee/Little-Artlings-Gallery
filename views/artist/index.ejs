@@ -9,9 +9,10 @@
     <title>Artist Profiles</title>
 </head>
 <body>
-    <img src="../assets/banner-logo.png"/>
+    <img src="/assets/banner-logo.png"/>
     <%- include('../partials/nav.ejs') %> 
     <h1> <%= foundUser.username %> 's Artist Profiles</h1>
+    <h2> Click on an artist's name to view and edit their profile.</h2>
     <div>
         <% if (foundUser.userArtists.length > 0) {%>
             <% foundUser.userArtists.forEach((artist) => { %>
@@ -22,9 +23,9 @@
            <% }) %>
             <% } %>
     </div>
-    <p>
-        <a href="/artist/artist-new">Add a New Artist Profile</a>
-    </p> 
+    <form action="/artist/artist-new" method="SHOW">
+        <button type="submit">Add a New Artist Profile</button>
+       </form>
     <p>
         <a href="/auth/sign-out">Sign out</a>
     </p>      

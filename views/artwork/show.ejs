@@ -6,24 +6,26 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/stylesheets/style.css" />
         <meta name="referrer" content="no-referrer"> <!-- this is placed here to override the 403 error with the imigur-->
-    <title>Check Out Artist Profile</title>
+    <title>Check Out Your Artwork</title>
 </head>
 
 <body>
     <img src="/assets/banner-logo.png"/>
     <%- include('../partials/nav.ejs') %> 
-    <h1> <%= artist.artistName %> 's Artist Profile</h1>
+    <h1>Check Out Your Artwork</h1>
     <div>
-        <p> Artist's Name:<%= artist.artistName %>
+        <p> Artist's Name:<%= artwork.artistName %>
         </p>
-        <p> Artist's Age:<%= artist.artistAge %>
+        <p> Artwork Title:<%= artwork.artworkTitle %>
         </p>
-        <p> Artist's Bio:<%= artist.artistBio %>
-        </p>
+        <div class="image-container">
+            <img src="<%= artwork.artworkImage %>"></img>  
+          </div>
     </div>
-    <p>
-        <a href="/artist/<%= artist._id %>/edit">Edit Profile</a>
-    </p> 
+        <form action="/artwork/<%=artwork._id%>/edit" method="GET">
+            <button type="submit">Edit My Artwork</button>
+        </form>
+  
     <p>
         <a href="/auth/sign-out">Sign out</a>
     </p>      

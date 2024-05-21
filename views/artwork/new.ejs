@@ -9,10 +9,10 @@
     <title>Add New</title>
   </head>
   <body>
-      <img src="../assets/banner-logo.png"/>
+      <img src="/assets/banner-logo.png"/>
     <%- include('../partials/nav.ejs') %>
 <h1>Add New Artwork to Your Gallery, <%= user.username %> : </h1>
-    <form action="../models/artwork" method="POST">
+    <form action="/artwork/new" method="POST">
         <label for="artwork-image"> Artwork URL:</label>
         <input type="text" name="artworkImage" id="artwork-image" required/>
         <br>

@@ -10,7 +10,7 @@ const Artwork = require('../models/artwork.js');
 router.get('/', async function (req, res) {
     try {
         const currentUser = await User.findById(req.session.user.userId).populate('userGallery');
-        console.log(currentUser);
+        console.log("Hi did we fix it?", currentUser.userGallery);
         res.render('./artwork/index.ejs', {user: currentUser});
     } catch (error) {
         console.log(error);
@@ -18,49 +18,69 @@ router.get('/', async function (req, res) {
     }
 });
 
-// // New artwork
-// router.get('/new', (req, res) => {
-//     console.log(req.session._id);
-//     res.render('artworks/new');
-// })
+// New artwork
+router.get('/new', (req, res) => {
+    console.log(req.session._id);
+    res.render('artwork/new');
+})
 
-// // Create
-// router.post('/', async (req, res) => {
-//     try {
-//     const currentUser = await User.findById(req.session.user._id)
-//     currentUser.gallery.push(req.body);
-//     await currentUser.save();
-//     res.redirect(`/user/${req.session.user_id}/artworks`)
-// } catch (error) {
-//     console.log(error)
-//     res.redirect(`/user/${req.session.user_id}/artworks/new`)
-// }
-// })
+// Create
+router.post('/new', async (req, res) => {
+    try {
+    const currentUser = await User.findById(req.session.user.userId);
+    const createdArtwork = await Artwork.create(req.body);
+    console.log(createdArtwork);
+    currentUser.userGallery.push(createdArtwork._id);
+    
+    await currentUser.save();
+    const foundUser = await User.findById(req.session.user.userId).populate('userGallery');
+    console.log(foundUser)
+    res.render('./artwork/index.ejs', {user: foundUser})
+} catch (error) {
+    console.log(error)
+    res.render(`./artwork/new.ejs`, {user: req.session.user});
+}
+});
 
-// //Delete
-// router.delete('/:itemId', async (req, res) => {
-//     try {
-//         const currentUser = await User.findById(req.session.user._id);
-//         currentUser.gallery.id(req.params.itemId).deleteOne()
-//         await currentUser.save();
-//         res.redirect(`/user/${req.session.user_id}/artworks`)
-//     } catch (error) {
-//         console.log(error)
-//         res.redirect(`/user/${req.session.user._id}/artworks/`)
-//     }
-// })
+//Delete
+router.delete('/:artworkId', async (req, res) => {
+    try {
+        await Artwork.deleteOne({_id: req.params.artworkId})
+        res.redirect('/artwork')
+    } catch (error) {
+        console.log(error)
+        res.redirect('/artwork')
+    }
+})
 
 // //Edit
-// router.get('/:itemId', async (req, res) => {
-//     try {
-//         const currentUser = await User.findById(req.session.user._id);
-//         const galleryItem = currentUser.gallery.id(req.params.itemId)
-//         res.render('./artworks/edit', {artwork: galleryItem})
-//     } catch (error) {
-//         console.log(error)
-//         res.redirect(`/user/${req.session.user._id}/artworks/`)
-//     } 
-// })
+router.post('/:artworkId/edit', async (req, res) => {
+    try {
+        // // const currentUser = await User.findById(req.session.user.userId).populate("userGallery");
+        // const galleryItem = currentUser.userGallery.filter((galleryItem) => galleryItem._id === req.params.itemId)
+        // console.log(req.params.itemId)
+        const artwork = await Artwork.findByIdAndUpdate(req.params.artworkId, req.body, {new: true});
+        res.render('./artwork/show', {artwork} )
+
+        // res.render('./artwork/edit', {artwork: galleryItem[0]})
+    } catch (error) {
+        console.log(error)
+        res.redirect(`/user/${req.session.user.userId}/artworks/`)
+    } 
+})
+
+router.get('/:artworkId/edit', async function (req, res) {
+    const artwork = await Artwork.findById(req.params.artworkId)
+    res.render('./artwork/edit.ejs', {artwork, user: req.session.user})
+})
+
+// //SHOW
+//individual Artist show
+router.get('/:artworkId', async function (req, res) {
+    const artwork = await Artwork.findById(req.params.artworkId)
+    res.render('./artwork/show.ejs', {artwork})
+})
+
 
 // //Update
 // router.post('/:itemId', async (req, res) => {

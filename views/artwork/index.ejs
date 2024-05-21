@@ -9,23 +9,30 @@
     <title>Your Artwork</title>
   </head>
   <body>
-    <img src="../assets/banner-logo.png"/>
+    <img src="/assets/banner-logo.png"/>
     <%- include('../partials/nav.ejs') %>
     <h1>Artwork in Your Gallery:</h1>
     <div>
       <% if (user.userGallery.length > 0) {%>
           <% user.userGallery.forEach((artwork) => { %>
             <div class="image-container">
-            <img src="<%= artwork.artworkImage %>"></img>  
+              <img src="<%= artwork.artworkImage %>"></img>  
+                <form action="/artwork/<%= artwork._id %>" method="GET"> 
+                <button type="submit"><%= artwork.artworkTitle %></button>
+              </form>
             </div>
-              <p>
-                <a href="/artwork/<%= artwork._id %>"><%= artwork.artworkTitle %></a>
-              </p>
+            <div>
               <% }) %>
           <% } else { %>
             <p>No artwork found in your gallery</p>
           <% }%>
-  </div>
+          </div>
+          <div>
+           <form action="/artwork/new" method="GET">
+            <button type="submit">Add New Artwork</button>
+           </form> 
+           </div>     
+    </div>
     <p>
         <a href="/auth/sign-out">Sign out</a>
     </p>
