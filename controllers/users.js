@@ -71,8 +71,8 @@ router.post('/sign-in', async (req, res) => {
     req.session.user = { username: userInDatabase.username, userId:userInDatabase._id }
     console.log(req.session)
 
-    // Redirect the user to the home page now that a session ha sbeen created
-    res.redirect('/'); //gallery page
+    // Redirect the user to the home page now that a session has sbeen created
+    res.redirect('/'); 
 })
 
 // Sign-out route

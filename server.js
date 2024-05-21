@@ -78,8 +78,6 @@ app.get('/community-gallery', async function (req, res) {
 })
 
 
-
-
 /* Run Express app on your computer on port 3000
 -------------------------------------------------- */
 app.listen(port, function () {

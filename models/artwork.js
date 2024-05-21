@@ -1,4 +1,3 @@
-// models/art.js
 
 const mongoose = require("mongoose");
 

@@ -15,10 +15,8 @@ router.get('/artist-profile', async function (req, res) {
 router.get('/artist-new', async function (req, res) {
     try {
     const currentUser = await User.findById(req.session.user.userId).populate('userArtists');
-    console.log('current User', currentUser)
     res.render('./artist/new.ejs', { foundUser: currentUser })
     } catch (error) {
-        console.log(error);
         res.redirect('/');
     }
 })
@@ -35,15 +33,11 @@ router.post('/', async (req, res) => {
     try {
     const currentUser = await User.findById(req.session.user.userId);
     const createdArtist = await Artist.create(req.body);
-    console.log(createdArtist);
-    currentUser.userArtists.push(createdArtist._id);
-    
+    currentUser.userArtists.push(createdArtist._id);  
     await currentUser.save();
     const foundUser = await User.findById(req.session.user.userId).populate('userArtists');
-    console.log(foundUser)
     res.render('./artist/index.ejs', { foundUser })
 } catch (error) {
-    console.log(error)
     res.render(`./artist/new.ejs`, {user: req.session.user});
 }
 });
@@ -55,19 +49,17 @@ router.delete('/:artistId', async (req, res) => {
         await Artist.deleteOne({_id: req.params.artistId})
         res.redirect('/artist/artist-profile')
     } catch (error) {
-        console.log(error)
         res.redirect('/artist/artist-profile')
     }
 })
 
 
-//**Edit
+//Edit
 router.get('/:artistId/edit', async (req, res) => {
     try {
         const artist = await Artist.findById(req.params.artistId);
         res.render('./artist/edit', {artist})
     } catch (error) {
-        console.log(error)
         res.redirect('/artist/artist-profile');
     }   
 })
@@ -79,7 +71,6 @@ router.post('/:artistId/edit', async (req, res) => {
         const artist = await Artist.findByIdAndUpdate(req.params.artistId, req.body, {new: true});
         res.render('./artist/show', {artist} )
     } catch (error) {
-        console.log(error)
         res.redirect('/artist-profile');
     }   
 })
