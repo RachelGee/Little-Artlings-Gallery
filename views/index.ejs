@@ -11,9 +11,10 @@
 </head>
 
 <body>
-    <%- include('./partials/nav.ejs') %> 
+
     <img src="/assets/logo.png"/>
     <% if (user) { %>
+        <%- include('./partials/nav.ejs') %>       
     <h1>Welcome to Little Artling's, <%= user.username %>!</h1>
     <p>
         <a href="/auth/sign-out">Sign out</a>

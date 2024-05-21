@@ -55,8 +55,7 @@ app.use(session({
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(passUserToView);
-app.use('/auth', authController);
-app.use(isSignedIn);
+// app.use(isSignedIn);
 app.use('/artist', artistsController);
 app.use('/artwork', artworksController);
 
@@ -64,11 +63,19 @@ app.use('/artwork', artworksController);
 /* Routes
 -------------------------------------------------- */
 // Home Page
+// app.get('/', function (req, res) {
+//     console.log(req.session)
+//     res.render('index', { user: req.session.user })
+// })
+
 app.get('/', function (req, res) {
     console.log(req.session)
-    res.render('index', { user: req.session.user })
+    res.render('./index.ejs', { user: req.session.user })
 })
 
+
+app.use('/auth', authController);
+app.use(isSignedIn);
 
 //Community Gallery
 app.get('/community-gallery', async function (req, res) {

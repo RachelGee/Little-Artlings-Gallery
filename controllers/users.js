@@ -14,6 +14,10 @@ const router = express.Router();
 /* Routes
 -------------------------------------------------- */
 // Sign-up route: display a form that triggers the create route when submitted
+router.get('/', (req, res) => {
+    res.render('/index.ejs')
+})
+
 router.get('/sign-up', (req, res) => {
     res.render('auth/sign-up')
 })
