@@ -63,10 +63,6 @@ app.use('/artwork', artworksController);
 /* Routes
 -------------------------------------------------- */
 // Home Page
-// app.get('/', function (req, res) {
-//     console.log(req.session)
-//     res.render('index', { user: req.session.user })
-// })
 
 app.get('/', function (req, res) {
     console.log(req.session)
