@@ -18,11 +18,12 @@ body {
     width: 100vw;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     overflow-x: scroll;
     img {
-      max-width: 400px;
+      max-width: 40vh;
+      max-height: 40vh;
     }
    } 
 
