@@ -9,7 +9,7 @@ This app is meant to be a place where parents can show off their child's artwork
 <img width="1440" alt="Screenshot 2024-05-21 at 8 00 23 AM" src="https://github.com/RachelGee/Little-Artlings-Gallery/assets/165956613/c629c349-cfd0-4cfc-815c-9b2ba064a98f">
 <img width="1440" alt="Screenshot 2024-05-21 at 8 00 37 AM" src="https://github.com/RachelGee/Little-Artlings-Gallery/assets/165956613/3703a53d-e342-4c47-8aa6-6242caaae87f">
 -- 🌟 LINK TO DEPLOYED GAME 🌟 --
-TBD
+https://little-artlings-art-gallery-bdb904623306.herokuapp.com/
 
 -- 🖼️ WIRE FRAMES 🖼️ --
 ![Artlings Home Page](https://github.com/RachelGee/Little-Artlings-Gallery/assets/165956613/d64321e8-2c06-48e9-8326-8f0281176c4a)
