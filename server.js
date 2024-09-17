@@ -40,7 +40,10 @@ const artistsController = require('./controllers/artists.js')
 
 /* Middleware
 -------------------------------------------------- */
-app.use(morgan('dev'))
+if(process.env.ON_HEROKU === 'false') {
+    app.use(morgan('dev'))
+}
+
 // Used to parse request bodies from PUT/PATCH/POST requests
 app.use(express.urlencoded({ extended: false }))
 // Allow HTML forms to send PUT/DELETE requests instead of just GET or POST
